@@ -22,7 +22,9 @@ end
 
 def print(students)
   students.each do |student|
-    puts "#{student[:name]} (#{student[:cohort]} cohort)"
+    if student[:name].length < 12
+      puts "#{student[:name]} (#{student[:cohort]} cohort)"
+    end
   end
 end
 
