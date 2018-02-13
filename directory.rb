@@ -21,8 +21,7 @@ def print_header
 end
 
 def print(students)
-  index = 0
-  while index < students.length
+  students.each do |student|
     puts "#{student[:name]} (#{student[:cohort]} cohort)"
   end
 end
