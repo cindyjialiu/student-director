@@ -22,7 +22,7 @@ end
 
 def print(students)
   students.each do |student|
-    puts "#{student[:name]} (#{student[:cohort]} cohort)"
+    puts "#{student[:name].center(15)} (#{student[:cohort]})"
   end
 end
 
