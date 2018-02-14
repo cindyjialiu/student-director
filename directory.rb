@@ -3,13 +3,18 @@ def input_students
   puts "To finish, just hit the return twice"
   # create an empty array
   students = []
-  # get the first name
-  name = gets.chomp
-  #While the name is not empty, repeat this code
-  while name != "" do
-    students << {name: name, cohort: :november}
-    puts "Now we have #{students.count} students"
+  while true do
     name = gets.chomp
+    break if name == ""
+    puts "please enter the hobbies of the students"
+    hobby = gets.chomp
+    puts "please enter the countries of birth of the students"
+    country_of_birth = gets.chomp
+    puts "please enter the heights of the students"
+    height = gets.chomp
+    students << {name: name, cohort: :november, hobby: hobby, country_of_birth:
+    country_of_birth, height: height}
+    puts "Now we have #{students.count} students"
   end
   # return the array of the students
   students
@@ -22,7 +27,7 @@ end
 
 def print(students)
   students.each do |student|
-    puts "#{student[:name]} (#{student[:cohort]} cohort)"
+    puts "#{student[:name]} #{student[:hobby]} #{student[:country_of_birth]} #{student[:height]}cm (#{student[:cohort]} cohort)"
   end
 end
 
