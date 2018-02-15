@@ -47,18 +47,22 @@ def print_header
 end
 
 def print(students)
-  students.map do |student|
-    if student[:cohort] == :February
-      puts "#{student[:name].center(15)} (#{student[:cohort]})"
+  if students.length 　>= 1
+    students.map do |student|
+      if student[:cohort] == :February
+        puts "#{student[:name].center(15)} (#{student[:cohort]})"
+      end
     end
   end
 end
 
 def print_footer(names)
-  if names.length == 1
-    puts "Overall, we have #{names.count} great student"
-  else
-    puts "Overall, we have #{names.count} great students"
+  if names.length >= 1
+    if names.length == 1
+      puts "Overall, we have #{names.count} great student"
+    else
+      puts "Overall, we have #{names.count} great students"
+    end
   end
 end
 students = input_students
