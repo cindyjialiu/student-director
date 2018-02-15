@@ -1,17 +1,43 @@
-def input_students
-  puts "please enter the names of the students"
-  puts "To finish, just hit the return twice"
-  # create an empty array
-  students = []
-  # get the first name
+def input_name
+  puts "please enter the name of the student"
   name = gets.chomp
-  #While the name is not empty, repeat this code
-  while name != "" do
-    students << {name: name, cohort: :november}
-    puts "Now we have #{students.count} students"
-    name = gets.chomp
+  name == "" ? nil : name
+end
+
+def input_cohort
+  while true do
+    puts "please enter the cohort(number of the month) of the students"
+    cohort = gets.chomp.to_i
+    cohort_months = {
+      1 => :January,
+      2 => :Febuary,
+      3 => :March,
+      4 => :April,
+      5 => :May,
+      6 => :June,
+      7 => :July,
+      8 => :August,
+      9 => :September,
+      10 => :October,
+      11 => :November,
+      12 => :December
+    }
+    if cohort_months.has_key?(cohort)
+      return cohort_months[cohort]
+    end
+    puts "Please enter a month between 1 to 12"
   end
-  # return the array of the students
+end
+
+def input_students
+  students = []
+  while true do
+    name = input_name
+    break if name == nil
+    cohort = input_cohort
+    students << {name: name, cohort: cohort}
+  end
+  puts "Now we have #{students.count} students"
   students
 end
 
