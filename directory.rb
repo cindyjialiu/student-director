@@ -10,7 +10,7 @@ def input_cohort
     cohort = gets.chomp.to_i
     cohort_months = {
       1 => :January,
-      2 => :Febuary,
+      2 => :February,
       3 => :March,
       4 => :April,
       5 => :May,
@@ -47,8 +47,10 @@ def print_header
 end
 
 def print(students)
-  students.each do |student|
-    puts "#{student[:name].center(15)} (#{student[:cohort]})"
+  students.map do |student|
+    if student[:cohort] == :February
+      puts "#{student[:name].center(15)} (#{student[:cohort]})"
+    end
   end
 end
 
