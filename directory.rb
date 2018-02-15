@@ -1,3 +1,4 @@
+@students = []
 def input_name
   puts "please enter the name of the student"
   name = gets.chomp
@@ -30,15 +31,13 @@ def input_cohort
 end
 
 def input_students
-  students = []
   while true do
     name = input_name
     break if name == nil
     cohort = input_cohort
-    students << {name: name, cohort: cohort}
+    @students << {name: name, cohort: cohort}
   end
-  puts "Now we have #{students.count} students"
-  students
+  puts "Now we have #{@students.count} students"
 end
 
 def print_header
@@ -46,48 +45,49 @@ def print_header
   puts "-------------"
 end
 
-def print(students)
-  if students.length >= 1
-    students.map do |student|
-      if student[:cohort] == :February
-        puts "#{student[:name].center(15)} (#{student[:cohort]})"
-      end
-    end
+def print_students_list
+  @students.each do |student|
+    puts "#{student[:name]} (#{student[:cohort]} cohort)"
   end
 end
 
-def print_footer(names)
-  if names.length >= 1
-    if names.length == 1
-      puts "Overall, we have #{names.count} great student"
+def print_footer
+  if @students.length == 1
+    puts "Overall, we have #{@students.count} great student"
+  else
+    puts "Overall, we have #{@students.count} great students"
+  end
+end
+
+def print_menu
+  puts "1. Input the students"
+  puts "2. Show the students"
+  puts "9. Exit"
+end
+
+def process(selection)
+  case selection
+    when "1"
+      input_students
+    when "2"
+      show_students
+    when "9"
+      exit #this will cause the program to terminate
     else
-      puts "Overall, we have #{names.count} great students"
-    end
+      puts "I don't know what you meant, try again"
   end
 end
 
 def interactive_menu
-  students = []
   loop do
-    #1. print the menu and ask the user what to do
-    puts "1. Input the students"
-    puts "2. Show the students"
-    puts "9. Exit"
-    #2. read the input and save it into a variable
-    selection = gets.chomp
-    #3. do what the user has asked
-    case selection
-      when "1"
-        students = input_students
-      when "2"
-        print_header
-        print(students)
-        print_footer(students)
-      when "9"
-        exit #this will cause the program to terminate
-      else
-        puts "I don't know what you meant, try again"
-     end
-   end
+    print_menu
+    process(gets.chomp)
+  end
+end
+
+def show_students
+    print_header
+    print_students_list
+    print_footer
 end
 interactive_menu
