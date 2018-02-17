@@ -114,23 +114,23 @@ end
 
 def save_students
   puts "You are now in '3. Save the list to a file'"
-  file = File.open(create_filename + ".csv", "w")
-  @students.each do |student|
-    student_data = [student[:name], student[:cohort]]
-    csv_line = student_data.join(",")
-    file.puts csv_line
+  File.open(create_filename + ".csv", "w") do |file|
+    @students.each do |student|
+      student_data = [student[:name], student[:cohort]]
+      csv_line = student_data.join(",")
+      file.puts csv_line
+    end
   end
-  file.close
 end
 
 def load_students
   puts "You are now in '4. Load the list from a file'"
-  file = File.open(create_filename + ".csv", "r")
-  file.readlines.each do |line|
-    name, cohort = line.chomp.split(",")
-    add_students(name, cohort)
+  File.open(create_filename + ".csv", "r") do |file|
+    file.readlines.each do |line|
+      name, cohort = line.chomp.split(",")
+      add_students(name, cohort)
+    end
   end
-  file.close
 end
 
 def try_load_students
