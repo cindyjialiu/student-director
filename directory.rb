@@ -33,6 +33,7 @@ end
 
 def input_name
   puts "please enter the name of the student"
+  puts "To finish, just hit return twice"
   name = STDIN.gets.chomp
   name == "" ? nil : name
 end
@@ -55,14 +56,13 @@ def input_cohort
       11 => :November,
       12 => :December
     }
-    if cohort_months.has_key?(cohort)
-      return cohort_months[cohort]
-    end
+    return cohort_months[cohort] if cohort_months.has_key?(cohort)
     puts "Please enter a month between 1 to 12"
   end
 end
 
 def input_students
+  puts "You are in 1. 'Input the studetns'"
   while true do
     name = input_name
     break if name == nil
@@ -73,13 +73,14 @@ def input_students
 end
 
 def add_students(name, cohort)
-  @students << {name: name, cohort: cohort}
+  @students << {name: name, cohort: cohort.to_sym}
 end
 
 def show_students
-    print_header
-    print_students_list
-    print_footer
+  puts "You are in '2. Show the students'"
+  print_header
+  print_students_list
+  print_footer
 end
 
 def print_header
@@ -99,6 +100,7 @@ def print_footer
 end
 
 def save_students
+  puts "You are now in '3. Save the list to students.csv'"
   file = File.open("students.csv", "w")
   @students.each do |student|
     student_data = [student[:name], student[:cohort]]
@@ -109,10 +111,11 @@ def save_students
 end
 
 def load_students(filename = "students.csv")
+  puts "You are now in '4. Load the list from students.csv'"
   file = File.open(filename, "r")
   file.readlines.each do |line|
     name, cohort = line.chomp.split(",")
-    add_students(name, cohort.to_sym)
+    add_students(name, cohort)
   end
   file.close
 end
